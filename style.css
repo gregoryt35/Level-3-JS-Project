@@ -1,0 +1,14 @@
+.display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 15%
+}
+
+#player1 {
+    border: 5px solid black;
+}
+
+#player2 {
+    border: 5px solid black;
+}
