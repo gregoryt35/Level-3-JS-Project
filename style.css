@@ -1,14 +1,28 @@
 .display {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    grid-gap: 25%
 }
 
-#player1 {
+#player {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
     border: 5px solid black;
 }
 
-#player2 {
+#computer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5%;
+    border: 5px solid black;
+}
+
+#rules {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 5px solid black;
 }
