@@ -1,28 +1,24 @@
-.display {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-}
-
-#player {
+body {
+    background-color: darksalmon;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    gap: 5%;
-    border: 5px solid black;
-}
-
-#computer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 5%;
-    border: 5px solid black;
-}
-
-#rules {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 5px solid black;
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.form {
+    width: 50%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+table, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+button {
+    width: 5%;
 }

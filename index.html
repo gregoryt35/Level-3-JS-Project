@@ -6,52 +6,122 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xtreme Rock Paper Scissors</title>
+    <title>Roll Roll Roll Your Dice</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script>
+        function initialize() {
+            numDice = 0;
+            numRolls = 0;
+            const array = [];
+        }
+
+        function setDiceAndRolls() {
+            numDice = parseInt(document.querySelector('input[name="numdice"]:checked').value);
+            numRolls = parseInt(document.getElementById('numrolls').value);
+        }
+
+        function roll() {
+            totalRolls = numDice * numRolls;
+            for (var i = 0; i < totalRolls; i++) {
+                array[i] = getRandomInteger(1, 6);
+            }
+        }
+
+        function calculateMean() {
+            sum = 0.0;
+            for (var i = 0; i < array.length; i++) {
+                sum += array[i];
+            }
+            return sum / array.length;
+        }
+
+        function calculateMedian() {
+            array.sort();
+            if (array.length % 2 === 0) {
+                middleSum = array[array.length / 2] + array[array.length / 2 + 1];
+                middle = middleSum / 2.0;
+            }
+            else return array[array.length / 2];
+        }
+
+        function calculateMode() {
+            let mode = [];
+            let max = 0 
+            let count = 0;
+
+            for (let i = 0; i < array.length; i++) {
+                const item = array[i];
+                
+                if(mode[item]) {
+                    mode[item]++;
+                } else {
+                    mode[item] = 1;
+                }
+                
+                if(count < mode[item]) {
+                    max = item;
+                    count = mode[item];
+                }
+            }
+    
+            return max;
+        }
+
+        function getRandomInteger(lower, upper) {
+            var multiplier = upper - (lower - 1);
+            var rnd = parseInt(Math.random() * multiplier) + lower;
+            return rnd;
+        }
+    </script>
 </head>
 
-<body>
+<body onload="initialize();">
 
-    <div class="display">
+    <h1>Roll Roll Roll Your Dice</h1>
 
-        <div id="player">
-            <div class="rock">
-                <img src="media/rock.png" alt="rock">
-            </div>
-            <div class="paper">
-                <img src="media/paper.png" alt="paper">
-            </div>
-            <div class="scissors">
-                <img src="media/scissors.png" alt="scissors">
-            </div>
-        </div>
+    <div class="form">
+        <h3>Please select how many dice you would like</h3>
+        <form>
+            <input type="radio" id="onedice" name="numdice" value="1">
+            <label for="onedice">One Dice</label><br>
+            <input type="radio" id="twodice" name="numdice" value="2">
+            <label for="twodice">Two Dice</label><br>
+            <input type="radio" id="threedice" name="numdice" value="3">
+            <label for="threedice">Three Dice</label><br>
 
-        <div id="rules">
-            <h1>Welcome to Xtreme Rock Paper Scissors!</h1>
-            <p>The game is simple. Each round you will choose
-                between rock, paper, or scissors. The computer
-                will randomly generate a move as well. The winner
-                of the round will recieve the other player's weapon.
-            </p>
+            <label for="numrolls">Number of Rolls</label><br>
+            <input type="text" id="numrolls" name="numrolls">
+        </form>
+    </div>
 
-            <p>● Rock beats scissors.</p>
-            <p>● Scissors beats paper.</p>
-            <p>● Paper beats rock.</p>
-        </div>
-        
-        <div id="computer">
-            <div class="rock">
-                <img src="media/rock.png" alt="rock">
-            </div>
-            <div class="paper">
-                <img src="media/paper.png" alt="paper">
-            </div>
-            <div class="scissors">
-                <img src="media/scissors.png" alt="scissors">
-            </div>
-        </div>
+    <br>
 
+    <button onclick="roll();">Roll</button>
+
+    <br>
+
+    <div class="table">
+        <table>
+            <tr>
+                <th>Frequency</th>
+            </tr>
+            <tr>
+                <th>Doubles</th>
+            </tr>
+            <tr>
+                <th>Triples</th>
+            </tr>
+            <tr>
+                <th>Mean</th>
+            </tr>
+            <tr>
+                <th>Median</th>
+            </tr>
+            <tr>
+                <th>Mode</th>
+            </tr>
+        </table>
     </div>
     
 </body>
