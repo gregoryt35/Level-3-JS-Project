@@ -1,24 +1,50 @@
 body {
-    background-color: darksalmon;
+    background-color: lightseagreen;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
-h1 {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+h1, h3 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.form {
-    width: 50%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.radioinput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-table, th {
+.textinput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#onedice, #twodice, #threedice {
+    accent-color: lightpink;
+}
+
+#numrolls {
+    margin-left: 35%;
+    width: 20%;
+    border: 2px solid lightpink;
+}
+
+#button {
+    width: 8%;
+    height: 50px;
+    border: 3px solid lightpink;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+}
+
+.table, th, td {
+    width: 20%;
     border: 1px solid black;
     border-collapse: collapse;
-}
-
-button {
-    width: 5%;
+    text-align: center;
 }

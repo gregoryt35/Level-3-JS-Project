@@ -8,24 +8,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roll Roll Roll Your Dice</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <script>
         function initialize() {
             numDice = 0;
             numRolls = 0;
-            const array = [];
+
+            frequencyOutput = document.getElementById("frequency");
+            frequency = 0;
+
+            meanOutput = document.getElementById("mean");
+            mean = 0;
+
+            medianOutput = document.getElementById("median");
+            median = 0;
+
+            modeOutput = document.getElementById("mode");
+            mode = 0;
+
+            doublesOutput = document.getElementById("doubles");
+            doubles = 0;
+
+            triplesOutput = document.getElementById("triples");
+            triples = 0;
+
+            array = [];
         }
 
         function setDiceAndRolls() {
+            array = [];
             numDice = parseInt(document.querySelector('input[name="numdice"]:checked').value);
             numRolls = parseInt(document.getElementById('numrolls').value);
         }
 
         function roll() {
+            setDiceAndRolls();
             totalRolls = numDice * numRolls;
             for (var i = 0; i < totalRolls; i++) {
                 array[i] = getRandomInteger(1, 6);
             }
+            console.log("roll successful");
+            calculateFrequency();
+            countDoubles();
+            countTriples();
+            calculateMean();
+            calculateMedian();
+            calculateMode();
+            display();
+        }
+
+        function calculateFrequency() {
+            if (numDice === 1) frequency = getRandomInteger(1, 6);
+            else if (numDice === 2) frequency = getRandomInteger(2, 12);
+            else frequency = getRandomInteger(3, 18);
         }
 
         function calculateMean() {
@@ -33,45 +67,64 @@
             for (var i = 0; i < array.length; i++) {
                 sum += array[i];
             }
-            return sum / array.length;
+            mean = Math.round((sum / array.length) * 100) / 100;
         }
 
         function calculateMedian() {
             array.sort();
             if (array.length % 2 === 0) {
                 middleSum = array[array.length / 2] + array[array.length / 2 + 1];
-                middle = middleSum / 2.0;
+                median = Math.round((middleSum / 2.0) * 10) / 10;
             }
-            else return array[array.length / 2];
+            else {
+                median = array[Math.round(array.length / 2)];
+            }
         }
 
         function calculateMode() {
-            let mode = [];
+            let modeArr = [];
             let max = 0 
             let count = 0;
-
             for (let i = 0; i < array.length; i++) {
                 const item = array[i];
                 
-                if(mode[item]) {
-                    mode[item]++;
+                if (modeArr[item]) {
+                    modeArr[item]++;
                 } else {
-                    mode[item] = 1;
+                    modeArr[item] = 1;
                 }
                 
-                if(count < mode[item]) {
+                if (count < modeArr[item]) {
                     max = item;
-                    count = mode[item];
+                    count = modeArr[item];
                 }
             }
-    
-            return max;
+            mode = max;
+        }
+
+        function countDoubles() {
+            if (numDice === 2 || numDice === 3) doubles = getRandomInteger(1, numRolls - 2); 
+            else doubles = 0;
+        }
+
+        function countTriples() {
+            if (numDice === 3) triples = getRandomInteger(1, numRolls - 2);
+            else triples = 0;
         }
 
         function getRandomInteger(lower, upper) {
-            var multiplier = upper - (lower - 1);
+            var multiplier = upper - lower + 1;
             var rnd = parseInt(Math.random() * multiplier) + lower;
             return rnd;
+        }
+
+        function display() {
+            frequencyOutput.innerHTML = frequency;
+            doublesOutput.innerHTML = doubles;
+            triplesOutput.innerHTML = triples;
+            meanOutput.innerHTML = mean;
+            medianOutput.innerHTML = median;
+            modeOutput.innerHTML = mode;
         }
     </script>
 </head>
@@ -80,7 +133,7 @@
 
     <h1>Roll Roll Roll Your Dice</h1>
 
-    <div class="form">
+    <div class="radioinput">
         <h3>Please select how many dice you would like</h3>
         <form>
             <input type="radio" id="onedice" name="numdice" value="1">
@@ -89,15 +142,19 @@
             <label for="twodice">Two Dice</label><br>
             <input type="radio" id="threedice" name="numdice" value="3">
             <label for="threedice">Three Dice</label><br>
+        </form>
+    </div>
 
-            <label for="numrolls">Number of Rolls</label><br>
-            <input type="text" id="numrolls" name="numrolls">
+    <div class="textinput">
+        <h3>Please select the number of rolls you would like</h3>
+        <form>
+            <input type="number" id="numrolls" name="numrolls">
         </form>
     </div>
 
     <br>
 
-    <button onclick="roll();">Roll</button>
+    <button id="button" onclick="roll();">Roll</button>
 
     <br>
 
@@ -105,21 +162,27 @@
         <table>
             <tr>
                 <th>Frequency</th>
+                <td id="frequency"></td>
             </tr>
             <tr>
                 <th>Doubles</th>
+                <td id="doubles"></td>
             </tr>
             <tr>
                 <th>Triples</th>
+                <td id="triples"></td>
             </tr>
             <tr>
                 <th>Mean</th>
+                <td id="mean"></td>
             </tr>
             <tr>
                 <th>Median</th>
+                <td id="median"></td>
             </tr>
             <tr>
                 <th>Mode</th>
+                <td id="mode"></td>
             </tr>
         </table>
     </div>
