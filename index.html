@@ -9,11 +9,7 @@
     <title>Roll Roll Roll Your Dice</title>
     <link rel="stylesheet" href="style.css">
     <script>
-        // What I changed is the colors to make them more contrast, I changed my heading sizes to make them bigger,
-        // added alt text to various elements, added form labels, and made it so that you can use tab and arrow keys to navigate
-        // without having to use the mouse
         function initialize() {
-            //fix
             numDice = 0;
             numRolls = 0;
 
@@ -139,7 +135,7 @@
 
     <div class="radioinput">
         <h2>Please select how many dice you would like</h2>
-        <form alt="input number of dice">
+        <form>
             <input type="radio" id="onedice" name="numdice" value="1">
             <label for="onedice">One Dice</label><br>
             <input type="radio" id="twodice" name="numdice" value="2">
@@ -151,20 +147,19 @@
 
     <div class="textinput">
         <h2>Please select the number of rolls you would like</h2>
-        <form alt="input number of rolls">
+        <form>
             <input type="number" id="numrolls" name="numrolls">
-            <label for="numrolls">rolls</label><br>
         </form>
     </div>
 
     <br>
 
-    <button id="button" alt="button to roll" onclick="roll();">Roll</button>
+    <button id="button" onclick="roll();">Roll</button>
 
     <br>
 
     <div class="table">
-        <table alt="table of values">
+        <table>
             <tr>
                 <th>Frequency</th>
                 <td id="frequency"></td>
